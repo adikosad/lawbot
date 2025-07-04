@@ -17,6 +17,7 @@ ADMIN_IDS = [7561197665, 736348190]  # список ID админов
 scope = [
     'https://www.googleapis.com/auth/spreadsheets',
     'https://www.googleapis.com/auth/drive'
+]
 google_creds = os.getenv('GOOGLE_CREDENTIALS')
 if google_creds:
     creds_dict = json.loads(google_creds)
