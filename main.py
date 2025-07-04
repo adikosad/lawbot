@@ -13,33 +13,6 @@ from oauth2client.service_account import ServiceAccountCredentials
 API_TOKEN = "8155269556:AAF1PyQHfNl77ButkzhhT0jNJRpJh5DkX0g"
 ADMIN_IDS = [7561197665, 736348190]  # список ID админов
 
-# Подключение к Google Sheets
-scope = [
-    'https://www.googleapis.com/auth/spreadsheets',
-    'https://www.googleapis.com/auth/drive'
-]
-google_creds = os.getenv('GOOGLE_CREDENTIALS')
-if google_creds:
-    creds_dict = json.loads(google_creds)
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
-else:
-    # Fallback to file for local development
-    import os
-import json
-from oauth2client.service_account import ServiceAccountCredentials
-
-scope = ['https://www.googleapis.com/auth/spreadsheets']  # или другие, если нужно
-
-key_json = os.environ.get('GOOGLE_SERVICE_ACCOUNT_KEY')
-if not key_json:
-    raise Exception("Переменная окружения GOOGLE_SERVICE_ACCOUNT_KEY не найдена!")
-
-credentials_info = json.loads(key_json)
-creds = ServiceAccountCredentials.from_json_keyfile_dict(credentials_info, scope)
-
-client = gspread.authorize(creds)
-sheet = client.open_by_key("1abcDEFgHiJKLmNOPQRstuVWXYZ12345678").sheet1
-
 # Telegram бот
 logging.basicConfig(level=logging.INFO)
 bot = Bot(token=API_TOKEN)
