@@ -38,7 +38,7 @@ credentials_info = json.loads(key_json)
 creds = ServiceAccountCredentials.from_json_keyfile_dict(credentials_info, scope)
 
 client = gspread.authorize(creds)
-sheet = client.open("bot").sheet1
+sheet = client.open_by_key("1abcDEFgHiJKLmNOPQRstuVWXYZ12345678").sheet1
 
 # Telegram бот
 logging.basicConfig(level=logging.INFO)
