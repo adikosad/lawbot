@@ -100,15 +100,6 @@ async def confirm_payment(call: types.CallbackQuery):
     question = pending_payments.pop(chat_id, "неизвестно")
     user = await bot.get_chat(chat_id)
 
-    # Запись в Google Таблицу
-    sheet.append_row([
-        f"{user.first_name} {user.last_name or ''}",
-        f"@{user.username or '-'}",
-        question,
-        datetime.now().strftime("%d.%m.%Y %H:%M"),
-        "Оплачено"
-    ])
-
     contact_button = InlineKeyboardMarkup(inline_keyboard=[
         [InlineKeyboardButton(text="📨 Написать юристу", url="https://t.me/lawbot_kg")]
     ])
