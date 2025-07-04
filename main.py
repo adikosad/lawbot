@@ -21,7 +21,19 @@ if google_creds:
     creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 else:
     # Fallback to file for local development
-    creds = ServiceAccountCredentials.from_json_keyfile_name("attached_assets/vaulted-broker-461712-a9-67dc4f80edbd.json", scope)
+    import os
+import json
+from oauth2client.service_account import ServiceAccountCredentials
+
+scope = ['https://www.googleapis.com/auth/spreadsheets']  # или другие, если нужно
+
+key_json = os.environ.get('GOOGLE_SERVICE_ACCOUNT_KEY')
+if not key_json:
+    raise Exception("Переменная окружения GOOGLE_SERVICE_ACCOUNT_KEY не найдена!")
+
+credentials_info = json.loads(key_json)
+creds = ServiceAccountCredentials.from_json_keyfile_dict(credentials_info, scope)
+
 client = gspread.authorize(creds)
 sheet = client.open("bot").sheet1
 
