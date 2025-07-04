@@ -14,7 +14,9 @@ API_TOKEN = "8155269556:AAF1PyQHfNl77ButkzhhT0jNJRpJh5DkX0g"
 ADMIN_IDS = [7561197665, 736348190]  # список ID админов
 
 # Подключение к Google Sheets
-scope = ['https://www.googleapis.com/auth/spreadsheets']
+scope = [
+    'https://www.googleapis.com/auth/spreadsheets',
+    'https://www.googleapis.com/auth/drive'
 google_creds = os.getenv('GOOGLE_CREDENTIALS')
 if google_creds:
     creds_dict = json.loads(google_creds)
